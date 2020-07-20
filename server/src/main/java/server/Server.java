@@ -16,7 +16,8 @@ public class Server {
 
     public Server() {
         clients = new Vector<>();
-        authService = new SimpleAuthService();
+        //authService = new SimpleAuthService();
+        authService = new DbHandler();
 
         ServerSocket server = null;
         Socket socket;
@@ -42,6 +43,7 @@ public class Server {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            ((DbHandler) authService).disconnect();
         }
     }
 
