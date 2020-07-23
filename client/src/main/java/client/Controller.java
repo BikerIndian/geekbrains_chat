@@ -137,6 +137,7 @@ public class Controller implements Initializable {
 
                     this.logFileName ="history_"+this.nick+".txt";
                     log = new Log(logFileName);
+                    textArea.appendText(log.getMess(100));
 
                     //цикл работы
                     while (true) {
