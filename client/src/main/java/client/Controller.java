@@ -58,6 +58,9 @@ public class Controller implements Initializable {
     private Stage regStage;
     RegController regController;
 
+    private Log log;
+    private String logFileName;
+
     public void setAuthenticated(boolean authenticated) {
         this.authenticated = authenticated;
         authPanel.setVisible(!authenticated);
@@ -132,6 +135,8 @@ public class Controller implements Initializable {
                         textArea.appendText(str + "\n");
                     }
 
+                    this.logFileName ="history_"+this.nick+".txt";
+                    log = new Log(logFileName);
 
                     //цикл работы
                     while (true) {
@@ -153,6 +158,7 @@ public class Controller implements Initializable {
                             }
 
                         } else {
+                            log.saveMess(str + "\n");
                             textArea.appendText(str + "\n");
                         }
                     }
@@ -172,6 +178,7 @@ public class Controller implements Initializable {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    log.close();
                 }
             }).start();
 
