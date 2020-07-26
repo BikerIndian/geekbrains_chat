@@ -12,5 +12,16 @@ public class MainLesson04 {
 
     public static void main(String[] args) {
 
+        /*
+        1. Создать три потока, каждый из которых выводит
+           определенную букву (A, B и C) 5 раз (порядок – ABСABСABС).
+           Используйте wait/notify/notifyAll.
+         */
+
+        ThreadPrintLIne threadPrintLIne = new ThreadPrintLIne();
+        threadPrintLIne.add("A ");
+        threadPrintLIne.add("B ");
+        threadPrintLIne.add("C \n");
+        threadPrintLIne.print(5);
     }
 }
