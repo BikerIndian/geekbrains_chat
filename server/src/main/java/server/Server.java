@@ -5,10 +5,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 
 public class Server {
     private List<ClientHandler> clients;
     private AuthService authService;
+    private ExecutorService executorService;
 
     public AuthService getAuthService() {
         return authService;
@@ -18,6 +22,9 @@ public class Server {
         clients = new Vector<>();
         //authService = new SimpleAuthService();
         authService = new DbHandler();
+        executorService = Executors.newCachedThreadPool();
+
+
 
         ServerSocket server = null;
         Socket socket;
@@ -44,6 +51,7 @@ public class Server {
                 e.printStackTrace();
             }
             ((DbHandler) authService).disconnect();
+            executorService.shutdown();
         }
     }
 
@@ -102,4 +110,7 @@ public class Server {
         }
     }
 
+    public ExecutorService getExecutorService() {
+        return executorService;
+    }
 }

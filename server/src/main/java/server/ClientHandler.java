@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.concurrent.ExecutorService;
 
 public class ClientHandler {
     Server server;
@@ -14,15 +15,17 @@ public class ClientHandler {
 
     private String nick;
     private String login;
+    private ExecutorService executorService;
 
     public ClientHandler(Server server, Socket socket) {
         try {
             this.server = server;
             this.socket = socket;
+            this.executorService = server.getExecutorService();
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
 
-            new Thread(() -> {
+            Thread t1 = new Thread(() -> {
                 try {
                     socket.setSoTimeout(5000);
 
@@ -113,8 +116,9 @@ public class ClientHandler {
                         e.printStackTrace();
                     }
                 }
-            }).start();
+            });
 
+            executorService.execute(t1);
 
         } catch (IOException e) {
             e.printStackTrace();
