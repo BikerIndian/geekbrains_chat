@@ -8,6 +8,7 @@ public class Car implements Runnable {
     private Race race;
     private int speed;
     private String name;
+
     public String getName() {
         return name;
     }
@@ -15,6 +16,7 @@ public class Car implements Runnable {
         return speed;
     }
     public Car(Race race, int speed) {
+
         this.race = race;
         this.speed = speed;
         CARS_COUNT++;
@@ -29,8 +31,10 @@ public class Car implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
+
     }
 }
