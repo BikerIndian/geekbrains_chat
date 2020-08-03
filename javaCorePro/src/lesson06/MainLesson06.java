@@ -33,13 +33,6 @@ public class MainLesson06 {
         [ 1 4 4 1 1 4 3 ] -> false
 
          */
-       // int[] arr = {1,2,4,4,2,3,4,1,7};
-        int[] arr = {1,4,2,3,3,1,7};
-        int[] arr2 = new MainLesson06().getArr(arr);
-        for (int i = 0; i <arr2.length ; i++) {
-            System.out.println(arr2[i] );
-        }
-
 
     }
 
@@ -62,4 +55,31 @@ public class MainLesson06 {
        
        return arrNew;
    }
+
+    public boolean isOneFour(int[] arr) {
+
+        boolean one = false;
+        boolean four = false;
+
+
+        for (int i = 0; i < arr.length; i++) {
+
+            if (arr[i] != 1 && arr[i] != 4){
+                return false;
+            }
+            if (!one && arr[i] == 1) {
+                one = true;
+            }
+
+            if (!four && arr[i] == 4) {
+                four = true;
+            }
+
+        }
+
+        if (one && four) {
+            return true;
+        }
+        return false;
+    }
 }
