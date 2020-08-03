@@ -16,8 +16,10 @@ public class ClientHandler {
     private String nick;
     private String login;
     private ExecutorService executorService;
+    private Log log;
 
     public ClientHandler(Server server, Socket socket) {
+        log = new Log();
         try {
             this.server = server;
             this.socket = socket;
@@ -47,7 +49,7 @@ public class ClientHandler {
                                     sendMsg("/authok " + newNick);
                                     nick = newNick;
                                     server.subscribe(this);
-                                    System.out.printf("Клиент %s подключился \n", nick);
+                                    log.mess(String.format("Клиент %s подключился \n", nick));
                                     socket.setSoTimeout(0);
                                     break;
                                 } else {
@@ -102,7 +104,7 @@ public class ClientHandler {
                 }catch (IOException e) {
                     e.printStackTrace();
                 } finally {
-                    System.out.println("Клиент отключился");
+                    log.mess("Клиент "+nick+" отключился");
                     server.unsubscribe(this);
                     try {
                         in.close();

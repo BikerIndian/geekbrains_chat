@@ -13,6 +13,7 @@ public class Server {
     private List<ClientHandler> clients;
     private AuthService authService;
     private ExecutorService executorService;
+    private Log log;
 
     public AuthService getAuthService() {
         return authService;
@@ -23,6 +24,7 @@ public class Server {
         //authService = new SimpleAuthService();
         authService = new DbHandler();
         executorService = Executors.newCachedThreadPool();
+        log = new Log();
 
 
 
@@ -33,13 +35,14 @@ public class Server {
 
         try {
             server = new ServerSocket(PORT);
-            System.out.println("Сервер запущен!");
+            //System.out.println("Сервер запущен!");
+            log.mess("Сервер запущен!");
 
             while (true) {
                 socket = server.accept();
-                System.out.println("Клиент подключился");
-                System.out.println("socket.getRemoteSocketAddress(): " + socket.getRemoteSocketAddress());
-                System.out.println("socket.getLocalSocketAddress() " + socket.getLocalSocketAddress());
+                log.mess("Клиент подключился");
+                log.mess("socket.getRemoteSocketAddress(): " + socket.getRemoteSocketAddress());
+                log.mess("socket.getLocalSocketAddress() " + socket.getLocalSocketAddress());
                 new ClientHandler(this, socket);
             }
         } catch (IOException e) {
