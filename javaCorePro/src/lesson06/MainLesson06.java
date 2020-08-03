@@ -8,6 +8,8 @@ package lesson06;
    Дата правки:   03.08.2020
 */
 
+import java.util.Arrays;
+
 public class MainLesson06 {
     public static void main(String[] args) {
         /*
@@ -31,6 +33,33 @@ public class MainLesson06 {
         [ 1 4 4 1 1 4 3 ] -> false
 
          */
+       // int[] arr = {1,2,4,4,2,3,4,1,7};
+        int[] arr = {1,4,2,3,3,1,7};
+        int[] arr2 = new MainLesson06().getArr(arr);
+        for (int i = 0; i <arr2.length ; i++) {
+            System.out.println(arr2[i] );
+        }
+
 
     }
+
+   public int[] getArr(int[] inArr ){
+
+       boolean isFour = false;
+       int indexEndFour = 0;
+       for (int i = 0; i < inArr.length; i++) {
+           if (inArr[i] == 4) {
+               isFour = true;
+               indexEndFour = i;
+           }
+
+       }
+       if (!isFour){
+           throw new RuntimeException("No four.");
+       }
+
+       int[] arrNew = Arrays.copyOfRange(inArr, indexEndFour+1, inArr.length);
+       
+       return arrNew;
+   }
 }
