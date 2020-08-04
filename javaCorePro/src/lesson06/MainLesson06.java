@@ -8,6 +8,8 @@ package lesson06;
    Дата правки:   03.08.2020
 */
 
+import java.util.Arrays;
+
 public class MainLesson06 {
     public static void main(String[] args) {
         /*
@@ -32,5 +34,52 @@ public class MainLesson06 {
 
          */
 
+    }
+
+   public int[] getArr(int[] inArr ){
+
+       boolean isFour = false;
+       int indexEndFour = 0;
+       for (int i = 0; i < inArr.length; i++) {
+           if (inArr[i] == 4) {
+               isFour = true;
+               indexEndFour = i;
+           }
+
+       }
+       if (!isFour){
+           throw new RuntimeException("No four.");
+       }
+
+       int[] arrNew = Arrays.copyOfRange(inArr, indexEndFour+1, inArr.length);
+       
+       return arrNew;
+   }
+
+    public boolean isOneFour(int[] arr) {
+
+        boolean one = false;
+        boolean four = false;
+
+
+        for (int i = 0; i < arr.length; i++) {
+
+            if (arr[i] != 1 && arr[i] != 4){
+                return false;
+            }
+            if (!one && arr[i] == 1) {
+                one = true;
+            }
+
+            if (!four && arr[i] == 4) {
+                four = true;
+            }
+
+        }
+
+        if (one && four) {
+            return true;
+        }
+        return false;
     }
 }
