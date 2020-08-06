@@ -8,6 +8,8 @@ package lesson07;
    Дата правки:   06.08.2020
 */
 
+import lesson07.MyUnit.MyTest;
+
 public class MainLesson07 {
     /*
     Создать класс, который может выполнять «тесты».
@@ -28,4 +30,7 @@ public class MainLesson07 {
     Это домашнее задание никак не связано с темой тестирования через JUnit
     и использованием этой библиотеки: проект пишется с нуля.
      */
+    public static void main(String[] args) {
+        new MyTest().start(Calculator.class);
+    }
 }
